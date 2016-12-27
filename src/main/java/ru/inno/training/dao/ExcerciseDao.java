@@ -1,6 +1,4 @@
-package ru.inno.training;
-
-import ru.inno.training.Excercise;
+package ru.inno.training.dao;
 
 import java.util.List;
 

@@ -1,8 +1,5 @@
-package ru.inno.training;
+package ru.inno.training.dao;
 
-import ru.inno.training.Users;
-
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +10,7 @@ public interface UsersDao<E, T, U> {
 
 
     public List<U> readUsers() throws SQLException;
-    public void createUser(String name, String surname, String email, boolean admin, String password );
+    public void createUser(String name, String surname, String email, boolean admin, String password);
 /*    public void deleteUser(int id);
     public void updateUser(T excercise);*/
 
