@@ -1,8 +1,10 @@
 package ru.inno.training;
 
-import javax.sound.midi.Soundbank;
+import ru.inno.training.dao.ExcerciseDao;
+import ru.inno.training.pojo.Excercise;
+import ru.inno.training.pojo.Users;
+
 import java.sql.*;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Main{
@@ -23,7 +25,5 @@ public class Main{
         for (Excercise excercise: excercises){
             System.out.println(excercise.getName() + " " + excercise.getDescription());
         }
-
-
     }
 }

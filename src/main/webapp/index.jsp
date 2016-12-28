@@ -13,6 +13,6 @@
 <body>
 <h1>Trayinig system</h1>
 <button type= "button" onclick = "location.href = '/registration.jsp'">Sign up</button>
-<button type= "button" onclick = "location.href='/yourTrainings.jsp'">Log in</button>
+<button type= "button" onclick = "location.href='/login.jsp'">Log in</button>
 </body>
 </html>

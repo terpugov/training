@@ -1,4 +1,4 @@
-package ru.inno.training;
+package ru.inno.training.pojo;
 
 /**
  * Created by mikhail on 24/12/16.

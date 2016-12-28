@@ -1,6 +1,8 @@
 package ru.inno.training;
 
 import org.apache.log4j.Logger;
+import ru.inno.training.dao.ExcerciseDao;
+import ru.inno.training.pojo.Excercise;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,15 +14,15 @@ import java.util.List;
 /**
  * Created by mikhail on 24/12/16.
  */
-public class ExcersiceDaoImpl implements ExcerciseDao{
+public class ExcersiceDaoImpl implements ExcerciseDao {
     private static Logger log = Logger.getLogger(UsersDaoImpl.class.getName());
-    private DBManagerPSQLimpl db = new DBManagerPSQLimpl();
-    private Connection curConnection = db.getConnection();
+    private DBManager db = new DBManagerPSQLimpl();
+//    private Connection curConnection = db.getConnection();
 
 /*    public Excercise readExcersise(){}
     public List<Excercise> readExcercise();*/
     public List<Excercise> readExcercise(){
-
+        Connection curConnection = db.getConnection();
         List<Excercise> excercises = new LinkedList<>();
         try {
             Statement stmt = curConnection.createStatement();
@@ -36,17 +38,16 @@ public class ExcersiceDaoImpl implements ExcerciseDao{
 //                log.debug("UsersDaoImpl{}" + rst.getString("user_id") + rst.getString("user_name"));
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } /*finally {
             try {
                 curConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-        }
+        }*/
         return excercises;
 
     }

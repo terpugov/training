@@ -1,10 +1,8 @@
-package ru.inno.training;
+package ru.inno.training.servlets;
 import org.apache.log4j.Logger;
 import ru.inno.training.service.RegistrationService;
 
 import java.io.*;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.*;
 import javax.servlet.http.*;
 /**
@@ -51,6 +49,11 @@ public class RegistrationServlet extends HttpServlet {
         else if (registrationService.checkAvailiableEmail(email)){
             log.info("I am in checkAvailiable{ }" + registrationService.checkAvailiableEmail(email) + email);
             registrationService.addUserToDB(name, surname, email,false , password);
+            registrationService.createInstanceUser(name, surname, email, password, req.getSession().getId(),false);
+//            req.getRequestDispatcher("/yourTrainings.jsp").forward(req,resp);
+            resp.sendRedirect("/yourTrainings.jsp");
+
+
         }
         else{
             log.info("I am in else{ } ");

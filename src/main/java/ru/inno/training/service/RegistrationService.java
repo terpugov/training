@@ -1,8 +1,8 @@
 package ru.inno.training.service;
 
-import ru.inno.training.Users;
-import ru.inno.training.UsersDao;
+import ru.inno.training.pojo.Users;
 import ru.inno.training.UsersDaoImpl;
+import ru.inno.training.dao.UsersDao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,6 +19,11 @@ public class RegistrationService {
             usersDao.createUser(name, surname, email, bolean, password);
         }
 
+    }
+
+    public Users createInstanceUser(String userName, String userSurname, String userEmail, String userPassword, String session, boolean userAdmin){
+        Users user = new Users(userName, userSurname, userEmail, userPassword,  userAdmin);
+        return user;
     }
     public boolean checkAvailiableEmail(String email)  {
 

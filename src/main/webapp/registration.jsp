@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/yourTrainings.jsp" method="post">
+<form action="/registration" method="post">
     First name:<br>
     <input type="text" name="name"><br>
     Last name:<br>
