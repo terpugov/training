@@ -1,10 +1,13 @@
-package ru.inno.training;
+package ru.inno.training.daoImpl;
 
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+
+import ru.inno.training.DBManager;
+import ru.inno.training.DBManagerPSQLimpl;
 import ru.inno.training.dao.UsersDao;
 import ru.inno.training.pojo.Users;
 
@@ -35,8 +38,7 @@ public class UsersDaoImpl implements UsersDao {
                 String email = rst.getString("user_email");
                 int id = rst.getInt("user_id");
                 String password = rst.getString("user_password");
-                boolean admin  = rst.getBoolean("user_admin");
-
+                boolean admin = rst.getBoolean("user_admin");
 
 
                 Users user = new Users(name, surname, email, password, admin);
@@ -102,8 +104,32 @@ public class UsersDaoImpl implements UsersDao {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String result = resultSet.getString(1);
-            log.debug("resultSet and result"+ result + " " + resultSet);
+            log.debug("resultSet and result" + result + " " + resultSet);
             return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Users getUserByEmail(String email) {
+        ResultSet resultSet;
+        Users user;
+        try {
+            PreparedStatement preparedStatement = curConnection.prepareStatement(" select * from users where user_email = ?");
+            preparedStatement.setString(1, email);
+
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            String userName = resultSet.getString(1);
+            String userSurname = resultSet.getString(2);
+            String userEmail = resultSet.getString(3);
+            String userPassword = resultSet.getString(4);
+            boolean userAdmin = resultSet.getBoolean(5);
+
+            user = new Users(userName, userSurname, userEmail, userPassword, userAdmin);
+            return user;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

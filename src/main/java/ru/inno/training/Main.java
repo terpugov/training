@@ -1,6 +1,8 @@
 package ru.inno.training;
 
 import ru.inno.training.dao.ExcerciseDao;
+import ru.inno.training.daoImpl.ExcersiceDaoImpl;
+import ru.inno.training.daoImpl.UsersDaoImpl;
 import ru.inno.training.pojo.Excercise;
 import ru.inno.training.pojo.Users;
 

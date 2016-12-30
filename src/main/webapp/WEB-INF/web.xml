@@ -24,6 +24,28 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>ru.inno.training.servlets.Logout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.inno.training.servlets.AuthFilter</filter-class>
+<!--        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>Initialization Paramter</param-value>
+        </init-param>-->
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/yourTrainings.jsp</url-pattern>
+    </filter-mapping>
 
 
 </web-app>

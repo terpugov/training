@@ -1,8 +1,12 @@
 package ru.inno.training.servlets;
 import org.apache.log4j.Logger;
+import ru.inno.training.pojo.Users;
 import ru.inno.training.service.RegistrationService;
+import ru.inno.training.service.SessionUserMap;
 
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 /**
@@ -12,6 +16,8 @@ public class RegistrationServlet extends HttpServlet {
 
     private static Logger log = Logger.getLogger(RegistrationServlet.class.getName());
     private String message;
+
+
     public void init() throws ServletException {
         // Do required initialization
         message = "I am in registration";
@@ -36,23 +42,27 @@ public class RegistrationServlet extends HttpServlet {
         String surname = req.getParameter("surname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        req.setAttribute("name", name);
+        req.setAttribute("surname", surname);
+        req.setAttribute("email", email);
+
+
 
         RegistrationService registrationService = new RegistrationService();
-        if (password.equals("")){
-            req.setAttribute("errorMessage", "enter password");
+        if (password.equals("") || password.length() < 6){
+            req.setAttribute("errorMessage", "password should be take more than 6 symbols");
             req.getRequestDispatcher("/registration.jsp").forward(req,resp);
         }
-        else if(email.equals("")){
-            req.setAttribute("errorMessage", "enter email");
+        else if(!registrationService.validateEmail(email)){
+            req.setAttribute("errorMessage", "wrong email");
             req.getRequestDispatcher("/registration.jsp").forward(req,resp);
         }
         else if (registrationService.checkAvailiableEmail(email)){
             log.info("I am in checkAvailiable{ }" + registrationService.checkAvailiableEmail(email) + email);
             registrationService.addUserToDB(name, surname, email,false , password);
-            registrationService.createInstanceUser(name, surname, email, password, req.getSession().getId(),false);
-//            req.getRequestDispatcher("/yourTrainings.jsp").forward(req,resp);
+            Users usr = registrationService.createInstanceUser(name, surname, email, password, req.getSession().getId(),false);
+            SessionUserMap.addUserSession(req.getSession().getId(), usr);
             resp.sendRedirect("/yourTrainings.jsp");
-
 
         }
         else{

@@ -2,7 +2,9 @@ package ru.inno.training.servlets;
 
 import org.apache.catalina.Session;
 import org.apache.log4j.Logger;
+import ru.inno.training.pojo.Users;
 import ru.inno.training.service.AuthService;
+import ru.inno.training.service.SessionUserMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,7 @@ import java.util.Map;
  */
 public class AuthServlet extends HttpServlet {
 
-    private Map sessionUser = new HashMap();
+
     private static Logger log = Logger.getLogger(RegistrationServlet.class.getName());
     private String message;
     public void init() throws ServletException {
@@ -40,6 +42,7 @@ public class AuthServlet extends HttpServlet {
         log.debug("HTTPSessiom{a}" + a.toString());
 
 
+
     }
 
     @Override
@@ -48,18 +51,16 @@ public class AuthServlet extends HttpServlet {
 //        request.getRequestDispatcher("/").forward(request,response);
 //        response.sendRedirect("/");
 
-        HttpSession a =  req.getSession();
-        log.debug("HTTPSessiom{a}" + a.getClass().getName());
-
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        AuthService authService = new AuthService();
+        log.info(AuthService.checkAuth(email, password));
+        if (AuthService.checkAuth(email, password)){
+            Users user;
+            user = AuthService.getUserbyEmail("email");
+            //user.setSession(req.getSession().getId());
+            SessionUserMap.addUserSession(req.getSession().getId(), user);
 
-        log.info(authService.checkAuth(email, password));
-        if (authService.checkAuth(email, password)){
-
-            log.debug("sessionUser{}" + sessionUser.entrySet().toString());
 
 //            req.getRequestDispatcher("/yourTrainings.jsp").forward(req,resp);
             resp.sendRedirect("/yourTrainings.jsp");
@@ -68,6 +69,7 @@ public class AuthServlet extends HttpServlet {
             log.info("AuthServlet else statement");
             req.setAttribute("errorMessage", "email or password is incorect, try again");
             req.getRequestDispatcher("/login.jsp").forward(req,resp);
+
         }
     }
     public void destroy () {

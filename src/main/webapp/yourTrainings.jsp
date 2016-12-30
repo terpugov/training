@@ -11,18 +11,38 @@
 <html>
 <head>
     <title> YourTraining </title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
+
 <body>
 
-<% ExcerciseService excerciseService = new ExcerciseService(); %>
-<% for(Excercise excercise: excerciseService.getExcercise()) { %>
 
-<tr>
-    <td><%=excercise.getName()%></td>
-    <td><%=excercise.getDescription()%></td>
-    <td><%=excercise.getExcerciseComplexity()%></td>
-    <td><%=excercise.getExcerciseType()%></td>
-</tr>
-<% } %>
+<table style="width:100%">
+
+    <tr>
+        <th>Excercise</th>
+        <th>Description</th>
+        <th>Complexity</th>
+        <th>Type</th>
+
+    </tr>
+        <% ExcerciseService excerciseService = new ExcerciseService(); %>
+        <% for(Excercise excercise: excerciseService.getExcercise()) { %>
+    <tr>
+        <td> <%=excercise.getName()%> </td>
+        <td> <%=excercise.getDescription()%> </td>
+        <td> <%=excercise.getExcerciseComplexity()%> </td>
+        <td> <%=excercise.getExcerciseType()%> </td>
+    </tr>
+    <% } %>
+</table>
+<a href="/logout">logout</a>
+
+
 </body>
 </html>

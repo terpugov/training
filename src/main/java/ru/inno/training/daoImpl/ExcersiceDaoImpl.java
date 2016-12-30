@@ -1,6 +1,8 @@
-package ru.inno.training;
+package ru.inno.training.daoImpl;
 
 import org.apache.log4j.Logger;
+import ru.inno.training.DBManager;
+import ru.inno.training.DBManagerPSQLimpl;
 import ru.inno.training.dao.ExcerciseDao;
 import ru.inno.training.pojo.Excercise;
 
