@@ -33,4 +33,9 @@ public class AuthService {
         return usersDao.getUserByEmail(email);
 
     }
+
+    public static Boolean isAdmin(String email){
+        UsersDao usersDao = new UsersDaoImpl();
+        return usersDao.getAdmin(email);
+    }
 }

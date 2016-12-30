@@ -135,4 +135,24 @@ public class UsersDaoImpl implements UsersDao {
         }
         return null;
     }
+
+    @Override
+    public Boolean getAdmin(String email) {
+        ResultSet resultSet;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = curConnection.prepareStatement(" select user_admin from users where user_email = ?");
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Boolean result = resultSet.getBoolean(1);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return false;
+    }
 }

@@ -4,6 +4,7 @@ import org.apache.catalina.Session;
 import org.apache.log4j.Logger;
 import ru.inno.training.pojo.Users;
 import ru.inno.training.service.AuthService;
+import ru.inno.training.service.SessionAdminMap;
 import ru.inno.training.service.SessionUserMap;
 
 import javax.servlet.ServletException;
@@ -60,11 +61,16 @@ public class AuthServlet extends HttpServlet {
             user = AuthService.getUserbyEmail("email");
             //user.setSession(req.getSession().getId());
             SessionUserMap.addUserSession(req.getSession().getId(), user);
-
+            if(AuthService.isAdmin(email)){
+                SessionAdminMap.addAdminSession(req.getSession().getId(), user);
+                resp.sendRedirect("/admin.jsp");
+                return;
+            }
 
 //            req.getRequestDispatcher("/yourTrainings.jsp").forward(req,resp);
             resp.sendRedirect("/yourTrainings.jsp");
         }
+
         else{
             log.info("AuthServlet else statement");
             req.setAttribute("errorMessage", "email or password is incorect, try again");

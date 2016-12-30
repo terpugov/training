@@ -16,6 +16,7 @@ public interface UsersDao<E, T, U> {
     public void createUser(String name, String surname, String email, boolean admin, String password);
     public String getAuth(String email);
     public Users getUserByEmail(String email);
+    public Boolean getAdmin(String email);
 /*    public void deleteUser(int id);
     public void updateUser(T excercise);*/
 

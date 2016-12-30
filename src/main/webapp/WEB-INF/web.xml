@@ -46,6 +46,29 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/yourTrainings.jsp</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>ru.inno.training.servlets.AdminFilter</filter-class>
+        <!--        <init-param>
+                    <param-name>test-param</param-name>
+                    <param-value>Initialization Paramter</param-value>
+                </init-param>-->
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin.jsp</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>AdminLogout</servlet-name>
+        <servlet-class>ru.inno.training.servlets.AdminLogout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminLogout</servlet-name>
+        <url-pattern>/adminLogout</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
