@@ -6,8 +6,8 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import ru.inno.training.DBManager;
-import ru.inno.training.DBManagerPSQLimpl;
+import ru.inno.training.db.DBManager;
+import ru.inno.training.db.DBManagerPSQLimpl;
 import ru.inno.training.dao.UsersDao;
 import ru.inno.training.pojo.Users;
 

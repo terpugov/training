@@ -23,18 +23,15 @@ public class AdminLogout extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         SessionAdminMap.deleteSession(req.getSession().getId());
         resp.sendRedirect("/index.jsp");
-
-
-
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
-
 
     }
 

@@ -1,4 +1,4 @@
-package ru.inno.training;
+package ru.inno.training.db;
 
 import java.sql.Connection;
 import java.sql.Statement;

@@ -11,7 +11,19 @@
     <title>Admin</title>
 </head>
 <body>
-<h1>Admin is here</h1>
-<a href="/adminLogout">logout</a>
+<h1>Add excercise</h1>
+<form action="/adminAdd" method="post">
+name:<br>
+<input type="text" name="name"><br>
+description:<br>
+<input type="text" name="description"><br>
+complexity:<br>
+<input type="text" name="complexity"><br>
+type:<br>
+<input type="text" name="type"><br>
+<input type="submit" value="Submit">
+</form>
+<a href="/adminLogout">logout </a>
+
 </body>
 </html>

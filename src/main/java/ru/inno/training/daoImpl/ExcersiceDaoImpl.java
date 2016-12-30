@@ -1,15 +1,12 @@
 package ru.inno.training.daoImpl;
 
 import org.apache.log4j.Logger;
-import ru.inno.training.DBManager;
-import ru.inno.training.DBManagerPSQLimpl;
+import ru.inno.training.db.DBManager;
+import ru.inno.training.db.DBManagerPSQLimpl;
 import ru.inno.training.dao.ExcerciseDao;
 import ru.inno.training.pojo.Excercise;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  */
 public class ExcersiceDaoImpl implements ExcerciseDao {
     private static Logger log = Logger.getLogger(UsersDaoImpl.class.getName());
-    private DBManager db = new DBManagerPSQLimpl();
+    private static DBManager db = new DBManagerPSQLimpl();
 //    private Connection curConnection = db.getConnection();
 
 /*    public Excercise readExcersise(){}
@@ -51,6 +48,36 @@ public class ExcersiceDaoImpl implements ExcerciseDao {
 
         }*/
         return excercises;
+
+    }
+
+    @Override
+    public void deleteExcercise(Excercise excercise) {
+        Connection curConnection = db.getConnection();
+        PreparedStatement prpStm = null;
+        ResultSet resultSet;
+
+    }
+
+    @Override
+    public void addExcercise(String name, String description, String complexity, String type) {
+        Connection curConnection = db.getConnection();
+        PreparedStatement prpStm = null;
+        ResultSet resultSet;
+
+        try {
+            prpStm = curConnection.prepareStatement("insert into excercise (excercise_name, excercise_description, excercise_complexity, excercise_type) values(?,?,?,?)");
+            prpStm.setString(1, name);
+            prpStm.setString(2, description);
+            prpStm.setString(3, complexity);
+            prpStm.setString(4, type);
+            prpStm.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 /*    public void deleteExcercise(Excercise excercise);

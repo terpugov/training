@@ -24,7 +24,6 @@ public class AdminFilter implements Filter {
 
         if(SessionAdminMap.isSessionExist(httpRequest.getSession().getId())){
             chain.doFilter(request, response);
-
         }
 
         else{

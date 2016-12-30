@@ -68,6 +68,16 @@
         <servlet-name>AdminLogout</servlet-name>
         <url-pattern>/adminLogout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>ru.inno.training.servlets.AdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/adminAdd</url-pattern>
+    </servlet-mapping>
+
 
 
 

@@ -17,14 +17,10 @@ public class AuthService {
         String user_pass = usersDao.getAuth(email);
         log.info("pass and pass "  + user_pass + " " + password );
         if (password.equals(user_pass)){
-
             return true;
-
         }
         else{
-
             return false;
-
         }
     }
     public static Users getUserbyEmail(String email){

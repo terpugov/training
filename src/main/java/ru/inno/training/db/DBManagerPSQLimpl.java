@@ -1,7 +1,6 @@
-package ru.inno.training;
+package ru.inno.training.db;
 
 import java.sql.*;
-import java.util.concurrent.locks.Lock;
 
 /**
  * Created by mikhail on 25/12/16.

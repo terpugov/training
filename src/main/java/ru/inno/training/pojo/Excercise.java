@@ -10,6 +10,8 @@ public class Excercise {
     private String excerciseComplexity;
     private String excerciseType;
 
+
+
     public String getName() {
         return name;
     }

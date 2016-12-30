@@ -1,5 +1,7 @@
 package ru.inno.training.dao;
 
+import ru.inno.training.pojo.Excercise;
+
 import java.util.List;
 
 /**
@@ -8,11 +10,9 @@ import java.util.List;
 public interface ExcerciseDao<E> {
 
 
-    public List<E> readExcercise();
-//    public void createExcercise();*/
-/*
-    public void deleteExcercise(Excercise excercise);
-    public void updateExcercise(Excercise excercise);
-*/
+    List<E> readExcercise();
+    void deleteExcercise(Excercise excercise);
+    void addExcercise(String name, String description, String complexity, String type);
+
 
 }
