@@ -8,6 +8,5 @@ import java.sql.Statement;
  */
 public interface DBManager {
 
-    public Connection getConnection();
 
 }

@@ -30,19 +30,15 @@ public class RegistrationService {
     }
     public boolean checkAvailiableEmail(String email)  {
 
-        try {
-            List<Users> usersList = usersDao.readUsers();
-            for( Users u : usersList){
+        List<Users> usersList = usersDao.readUsers();
+        for( Users u : usersList){
 
-                if (email.equals(u.getUserEmail())){
-                    return false;
-                }
-
+            if (email.equals(u.getUserEmail())){
+                return false;
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
         return true;
     }
     public static boolean validateEmail(String email){

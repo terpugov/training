@@ -6,6 +6,7 @@ import ru.inno.training.pojo.Users;
 import ru.inno.training.service.AuthService;
 import ru.inno.training.service.SessionAdminMap;
 import ru.inno.training.service.SessionUserMap;
+import ru.inno.training.service.exceptions.ServiceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,28 +57,38 @@ public class AuthServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        log.info(AuthService.checkAuth(email, password));
-        if (AuthService.checkAuth(email, password)){
-            Users user;
-            user = AuthService.getUserbyEmail("email");
-            //user.setSession(req.getSession().getId());
-            SessionUserMap.addUserSession(req.getSession().getId(), user);
-            if(AuthService.isAdmin(email)){
-                SessionAdminMap.addAdminSession(req.getSession().getId(), user);
-                resp.sendRedirect("/admin.jsp");
-                return;
-            }
+//        log.info(AuthService.checkAuth(email, password));
+            if (AuthService.checkAuth(email, password)){
+                Users user;
+
+
+                try {
+                    user = AuthService.getUserbyEmail("email");
+
+                    //user.setSession(req.getSession().getId());
+                    SessionUserMap.addUserSession(req.getSession().getId(), user);
+                    if(AuthService.isAdmin(email)){
+                        SessionAdminMap.addAdminSession(req.getSession().getId(), user);
+                        resp.sendRedirect("/admin.jsp");
+                        return;
+                    }
 
 //            req.getRequestDispatcher("/yourTrainings.jsp").forward(req,resp);
-            resp.sendRedirect("/yourTrainings.jsp");
-        }
 
-        else{
-            log.info("AuthServlet else statement");
-            req.setAttribute("errorMessage", "email or password is incorect, try again");
-            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                    resp.sendRedirect("/sqlexception.jsp");
+                }
+                resp.sendRedirect("/yourTrainings.jsp");
+            }
 
-        }
+            else{
+                log.info("AuthServlet else statement");
+                req.setAttribute("errorMessage", "email or password is incorect, try again");
+                req.getRequestDispatcher("/login.jsp").forward(req,resp);
+
+            }
+
     }
     public void destroy () {
     }

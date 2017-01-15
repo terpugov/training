@@ -1,9 +1,8 @@
 package ru.inno.training.dao;
 
-import org.apache.catalina.User;
+import ru.inno.training.dao.exceptions.DataException;
 import ru.inno.training.pojo.Users;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,11 +11,12 @@ import java.util.List;
 public interface UsersDao<E, T, U> {
 
 
-    public List<U> readUsers() throws SQLException;
+
+    public List<U> readUsers();
     public void createUser(String name, String surname, String email, boolean admin, String password);
-    public String getAuth(String email);
-    public Users getUserByEmail(String email);
-    public Boolean getAdmin(String email);
+    public String getAuth(String email) throws DataException;
+    public Users getUserByEmail(String email) throws DataException;
+    public Boolean getAdmin(String email) throws DataException;
 /*    public void deleteUser(int id);
     public void updateUser(T excercise);*/
 

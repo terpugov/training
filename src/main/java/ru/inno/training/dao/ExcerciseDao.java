@@ -1,5 +1,6 @@
 package ru.inno.training.dao;
 
+import ru.inno.training.dao.exceptions.DataException;
 import ru.inno.training.pojo.Excercise;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
 public interface ExcerciseDao<E> {
 
 
-    List<E> readExcercise();
-    void deleteExcercise(Excercise excercise);
+    List<E> readExcercise() throws DataException;
+    void deleteExcercise(Excercise excercise) throws DataException;
     void addExcercise(String name, String description, String complexity, String type);
 
 

@@ -1,5 +1,7 @@
 package ru.inno.training.service;
 
+import org.apache.tomcat.dbcp.dbcp2.PoolingDataSource;
+import ru.inno.training.dao.ExcerciseDao;
 import ru.inno.training.daoImpl.ExcersiceDaoImpl;
 
 /**
@@ -7,8 +9,9 @@ import ru.inno.training.daoImpl.ExcersiceDaoImpl;
  */
 public class AdminService {
 
+
     public static void addExcercise(String name, String description, String complexity, String type){
-        ExcersiceDaoImpl excersiceDao = new ExcersiceDaoImpl();
+        ExcerciseDao excersiceDao = new ExcersiceDaoImpl();
         excersiceDao.addExcercise(name, description, complexity, type);
     }
 }

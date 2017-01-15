@@ -1,6 +1,10 @@
 <%@ page import="ru.inno.training.service.RegistrationService" %>
 <%@ page import="ru.inno.training.pojo.Excercise" %>
-<%@ page import="ru.inno.training.service.ExcerciseService" %><%--
+<%@ page import="ru.inno.training.service.ExcerciseService" %>
+<%@ page import="ru.inno.training.service.exceptions.ExcerciseServiceException" %>
+<%@ page errorPage="sqlexception.jsp" %>
+<%--
+
   Created by IntelliJ IDEA.
   User: mikhail
   Date: 27/12/16
@@ -31,15 +35,18 @@
         <th>Type</th>
 
     </tr>
+
+
         <% ExcerciseService excerciseService = new ExcerciseService(); %>
-        <% for(Excercise excercise: excerciseService.getExcercise()) { %>
+
+        <% try{for(Excercise excercise: excerciseService.getExcercise()) { %>
     <tr>
         <td> <%=excercise.getName()%> </td>
         <td> <%=excercise.getDescription()%> </td>
         <td> <%=excercise.getExcerciseComplexity()%> </td>
         <td> <%=excercise.getExcerciseType()%> </td>
     </tr>
-    <% } %>
+    <% } } catch (ExcerciseServiceException e){throw e;}%>
 </table>
 <a href="/logout">logout</a>
 
